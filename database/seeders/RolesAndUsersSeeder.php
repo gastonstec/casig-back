@@ -7,30 +7,46 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Seeder `RolesAndUsersSeeder`
+ * 
+ * Se encarga de la creación de los roles y la asignación de estos a usuarios predefinidos en la base de datos.
+ */
 class RolesAndUsersSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Ejecuta el seeder.
+     * 
+     * Crea los roles `admin` y `employee` y asigna dichos roles a usuarios específicos.
+     *
+     * @return void
+     */
+    public function run(): void
     {
-        // Crear roles
-        $adminRole = Role::create(['name' => 'admin']); // Rol de administrador
-        $employeeRole = Role::create(['name' => 'employee']); // Rol de empleado
+        // ✅ Creación de roles si no existen
+        $adminRole = Role::firstOrCreate(['name' => 'admin']); // Rol de administrador
+        $employeeRole = Role::firstOrCreate(['name' => 'employee']); // Rol de empleado
 
-        // Crear usuario administrador
-        $adminUser = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'), // Cambia 'password' por la contraseña que quieras
-        ]);
-        $adminUser->assignRole($adminRole);
+        // ✅ Creación del usuario administrador si no existe
+        $adminUser = User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('password'), // Se puede cambiar la contraseña por seguridad
+            ]
+        );
+        $adminUser->assignRole($adminRole); // ✅ Asignar rol de administrador
 
-        // Crear usuario empleado
-        $employeeUser = User::create([
-            'name' => 'Employee User',
-            'email' => 'employee@example.com',
-            'password' => Hash::make('password'), // Cambia 'password' por la contraseña que quieras
-        ]);
-        $employeeUser->assignRole($employeeRole);
+        // ✅ Creación del usuario empleado si no existe
+        $employeeUser = User::firstOrCreate(
+            ['email' => 'employee@example.com'],
+            [
+                'name' => 'Employee User',
+                'password' => Hash::make('password'), // Se puede cambiar la contraseña
+            ]
+        );
+        $employeeUser->assignRole($employeeRole); // ✅ Asignar rol de empleado
 
-        echo "Roles y usuarios creados correctamente.\n";
+        echo "✅ Roles y usuarios creados correctamente.\n";
     }
 }

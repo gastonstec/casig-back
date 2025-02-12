@@ -14,3 +14,5 @@
     </ul>
 </body>
 </html>
+
+<!-- ⚠️ Este archivo actualmente no está en uso. Puede ser activado en futuras versiones si se requiere un panel de administración más detallado. -->

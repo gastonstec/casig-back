@@ -1,15 +1,23 @@
 <?php
 
+/**
+ * Configuración del sistema de colas en Laravel.
+ *
+ * Este archivo define las conexiones y parámetros para la gestión de colas
+ * de trabajos en segundo plano. Laravel admite varios backends de colas,
+ * incluyendo base de datos, Redis, Amazon SQS y más.
+ */
+
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Queue Connection Name
+    | Conexión Predeterminada de la Cola
     |--------------------------------------------------------------------------
     |
-    | Laravel's queue supports a variety of backends via a single, unified
-    | API, giving you convenient access to each backend using identical
-    | syntax for each. The default queue connection is defined below.
+    | Esta opción define la conexión de cola predeterminada que se utilizará.
+    | Laravel proporciona múltiples opciones de backend para manejar tareas
+    | en segundo plano de manera eficiente.
     |
     */
 
@@ -17,32 +25,35 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Queue Connections
+    | Conexiones de Colas Disponibles
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the connection options for every queue backend
-    | used by your application. An example configuration is provided for
-    | each backend supported by Laravel. You're also free to add more.
+    | Se configuran las conexiones para cada backend de cola disponible.
+    | Laravel permite definir múltiples conexiones y utilizar la más
+    | adecuada según el entorno.
     |
-    | Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
+    | Backends compatibles: "sync", "database", "beanstalkd", "sqs", "redis", "null"
     |
     */
 
     'connections' => [
 
+        // Cola síncrona: los trabajos se ejecutan inmediatamente
         'sync' => [
             'driver' => 'sync',
         ],
 
+        // Cola basada en base de datos
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_QUEUE_CONNECTION'),
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
-            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90), // Tiempo antes de reintentar
             'after_commit' => false,
         ],
 
+        // Cola basada en Beanstalkd (requiere instalación de Beanstalkd)
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),
@@ -52,6 +63,7 @@ return [
             'after_commit' => false,
         ],
 
+        // Cola basada en Amazon SQS
         'sqs' => [
             'driver' => 'sqs',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -63,6 +75,7 @@ return [
             'after_commit' => false,
         ],
 
+        // Cola basada en Redis (recomendada para alta concurrencia)
         'redis' => [
             'driver' => 'redis',
             'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
@@ -76,12 +89,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Job Batching
+    | Configuración de Lotes de Trabajos (Job Batching)
     |--------------------------------------------------------------------------
     |
-    | The following options configure the database and table that store job
-    | batching information. These options can be updated to any database
-    | connection and table which has been defined by your application.
+    | Aquí se define la configuración de almacenamiento para trabajos en lote.
+    | Laravel permite agrupar trabajos en "batches" para su ejecución.
     |
     */
 
@@ -92,14 +104,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Failed Queue Jobs
+    | Configuración de Trabajos Fallidos
     |--------------------------------------------------------------------------
     |
-    | These options configure the behavior of failed queue job logging so you
-    | can control how and where failed jobs are stored. Laravel ships with
-    | support for storing failed jobs in a simple file or in a database.
+    | Se definen las opciones de almacenamiento para registrar trabajos fallidos.
+    | Esto permite depurar errores y reintentar trabajos sin perder información.
     |
-    | Supported drivers: "database-uuids", "dynamodb", "file", "null"
+    | Drivers soportados: "database-uuids", "dynamodb", "file", "null"
     |
     */
 
