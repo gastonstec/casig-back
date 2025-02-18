@@ -11,7 +11,7 @@ Este proyecto es un sistema de gestión de asignación de equipos que permite a 
 ✅ **Spatie Permission** – Gestión de roles y permisos  
 ✅ **Bootstrap** – Estilización de la interfaz  
 ✅ **Socialite** – Autenticación con Google  
-✅ **SQLite/MySQL** – Base de datos  
+✅ **MySQL** – Base de datos  
 ✅ **Blade** – Sistema de plantillas de Laravel  
 
 ---
@@ -22,7 +22,7 @@ Antes de instalar el proyecto, asegúrate de tener lo siguiente:
 🔹 **PHP** >= 8.1  
 🔹 **Composer**  
 🔹 **Node.js & npm** (para compilación de assets)  
-🔹 **SQLite o MySQL** configurado  
+🔹 **MySQL** configurado  
 
 ---
 
@@ -117,5 +117,5 @@ Realiza los cambios y haz un commit (git commit -m "feat: Descripción del cambi
 Sube los cambios (git push origin nueva-feature).
 Abre un pull request.
 ✍️ Autor
-👩‍💻 Desarrollador: Victor Hernandez
+👩‍💻 Desarrollador: VHernandez
 
