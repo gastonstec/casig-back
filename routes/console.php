@@ -5,24 +5,24 @@ use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
-| Definición de Comandos Artisan Personalizados
+| Custom Artisan Command Definitions
 |--------------------------------------------------------------------------
 |
-| Este archivo permite registrar comandos de consola personalizados que 
-| pueden ejecutarse a través de Artisan en Laravel. 
-| En este caso, se define un comando que muestra una cita inspiradora.
+| This file allows you to register custom console commands that can be 
+| executed through Artisan in Laravel. 
+| In this case, a command is defined to display an inspirational quote.
 |
 */
 
 /**
- * Comando personalizado: "php artisan inspire"
+ * Custom Command: "php artisan inspire"
  *
- * Este comando mostrará una cita motivacional aleatoria cada vez que se ejecute.
+ * This command will display a random motivational quote each time it runs.
  * 
- * Uso en terminal:
+ * Usage in terminal:
  *   php artisan inspire
  */
 Artisan::command('inspire', function () {
-    // Muestra una cita inspiradora en la terminal
+    // Displays an inspirational quote in the terminal
     $this->comment(Inspiring::quote());
-})->purpose('Muestra una cita inspiradora en la consola.');
+})->purpose('Displays an inspirational quote in the console.');

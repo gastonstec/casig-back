@@ -15,4 +15,4 @@
 </body>
 </html>
 
-<!-- ⚠️ Este archivo actualmente no está en uso. Puede ser activado en futuras versiones si se requiere un panel de administración más detallado. -->
+<!-- ⚠️ This file is currently not in use. It may be activated in future versions if a more detailed admin panel is required. -->

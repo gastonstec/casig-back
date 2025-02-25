@@ -5,29 +5,29 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 /**
- * Configuración de la aplicación Laravel.
+ * Laravel application configuration.
  *
- * Este archivo define la configuración principal de la aplicación, incluyendo
- * el enrutamiento, el middleware y la gestión de excepciones.
+ * This file defines the main configuration of the application, including
+ * routing, middleware, and exception handling.
  */
 
 return Application::configure(basePath: dirname(__DIR__))
 
-    // Configuración de rutas
+    // Routing configuration
     ->withRouting(
-        web: __DIR__.'/../routes/web.php', // Rutas web
-        commands: __DIR__.'/../routes/console.php', // Rutas de comandos de consola
-        health: '/up', // Ruta de verificación de estado
+        web: __DIR__.'/../routes/web.php', // Web routes
+        commands: __DIR__.'/../routes/console.php', // Console command routes
+        health: '/up', // Health check route
     )
 
-    // Configuración de middleware global
+    // Global middleware configuration
     ->withMiddleware(function (Middleware $middleware) {
-        // Aquí se pueden registrar middleware personalizados
+        // Custom middleware can be registered here
     })
 
-    // Configuración de manejo de excepciones
+    // Exception handling configuration
     ->withExceptions(function (Exceptions $exceptions) {
-        // Aquí se pueden personalizar las excepciones
+        // Exceptions can be customized here
     })
 
     ->create();

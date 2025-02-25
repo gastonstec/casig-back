@@ -3,21 +3,21 @@
 use Illuminate\Support\Str;
 
 /**
- * Configuración del sistema de caché en Laravel.
+ * Laravel cache system configuration.
  *
- * Este archivo define los diferentes almacenes de caché que la aplicación puede usar,
- * permitiendo mejorar el rendimiento a través de mecanismos de almacenamiento rápido.
+ * This file defines the different cache stores that the application can use,
+ * allowing performance improvements through fast storage mechanisms.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Almacén de Caché Predeterminado
+    | Default Cache Store
     |--------------------------------------------------------------------------
     |
-    | Esta opción define el almacén de caché que se utilizará por defecto en la
-    | aplicación. Se puede modificar a través de la variable de entorno CACHE_STORE.
+    | This option defines the default cache store that will be used in the
+    | application. It can be modified through the CACHE_STORE environment variable.
     |
     */
 
@@ -25,27 +25,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Almacenes de Caché Disponibles
+    | Available Cache Stores
     |--------------------------------------------------------------------------
     |
-    | Se pueden definir múltiples almacenes de caché, cada uno utilizando un
-    | controlador diferente. Esto permite tener distintos tipos de caché en la
-    | aplicación según los requisitos del sistema.
+    | Multiple cache stores can be defined, each using a different driver.
+    | This allows having different types of cache in the application depending
+    | on the system requirements.
     |
-    | Controladores soportados: "array", "database", "file", "memcached",
-    |                            "redis", "dynamodb", "octane", "null"
+    | Supported drivers: "array", "database", "file", "memcached",
+    |                    "redis", "dynamodb", "octane", "null"
     |
     */
 
     'stores' => [
 
-        // Almacén basado en arrays (no persistente)
+        // Array-based store (non-persistent)
         'array' => [
             'driver' => 'array',
             'serialize' => false,
         ],
 
-        // Almacén basado en base de datos (persistente)
+        // Database-based store (persistent)
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CACHE_CONNECTION'),
@@ -54,14 +54,14 @@ return [
             'lock_table' => env('DB_CACHE_LOCK_TABLE'),
         ],
 
-        // Almacén basado en archivos (persistente)
+        // File-based store (persistent)
         'file' => [
             'driver' => 'file',
             'path' => storage_path('framework/cache/data'),
             'lock_path' => storage_path('framework/cache/data'),
         ],
 
-        // Almacén basado en Memcached (requiere configuración de servidor Memcached)
+        // Memcached-based store (requires Memcached server configuration)
         'memcached' => [
             'driver' => 'memcached',
             'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
@@ -70,7 +70,7 @@ return [
                 env('MEMCACHED_PASSWORD'),
             ],
             'options' => [
-                // Memcached::OPT_CONNECT_TIMEOUT => 2000, // Tiempo de espera para la conexión
+                // Memcached::OPT_CONNECT_TIMEOUT => 2000, // Connection timeout
             ],
             'servers' => [
                 [
@@ -81,14 +81,14 @@ return [
             ],
         ],
 
-        // Almacén basado en Redis (recomendado para aplicaciones de alto rendimiento)
+        // Redis-based store (recommended for high-performance applications)
         'redis' => [
             'driver' => 'redis',
             'connection' => env('REDIS_CACHE_CONNECTION', 'cache'),
             'lock_connection' => env('REDIS_CACHE_LOCK_CONNECTION', 'default'),
         ],
 
-        // Almacén basado en DynamoDB (para aplicaciones en AWS)
+        // DynamoDB-based store (for AWS applications)
         'dynamodb' => [
             'driver' => 'dynamodb',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -98,7 +98,7 @@ return [
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
-        // Almacén basado en Octane (para aplicaciones con Laravel Octane)
+        // Octane-based store (for Laravel Octane applications)
         'octane' => [
             'driver' => 'octane',
         ],
@@ -107,11 +107,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Prefijo para las Claves de Caché
+    | Cache Key Prefix
     |--------------------------------------------------------------------------
     |
-    | Se define un prefijo para evitar colisiones cuando se usan sistemas de caché
-    | compartidos con otras aplicaciones en el mismo entorno.
+    | A prefix is defined to avoid collisions when using shared cache systems
+    | with other applications in the same environment.
     |
     */
 

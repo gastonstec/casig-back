@@ -1,27 +1,27 @@
 <?php
 
 /**
- * Configuración de correo en Laravel.
+ * Laravel mail configuration.
  *
- * Este archivo define los ajustes utilizados para el envío de correos electrónicos.
- * Laravel soporta múltiples servicios de correo como SMTP, Sendmail, Mailgun, SES,
- * Postmark, entre otros.
+ * This file defines the settings used for sending emails.
+ * Laravel supports multiple mail services such as SMTP, Sendmail, Mailgun, SES,
+ * Postmark, among others.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Mailer Predeterminado
+    | Default Mailer
     |--------------------------------------------------------------------------
     |
-    | Esta opción controla el servicio de correo que se usará para enviar 
-    | los emails de la aplicación, a menos que se especifique otro en 
-    | el momento del envío. Se puede configurar dentro del array "mailers".
+    | This option controls the mail service that will be used to send emails
+    | from the application unless another one is specified at the time of sending.
+    | It can be configured within the "mailers" array.
     |
-    | Valores soportados: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
-    |                     "postmark", "resend", "log", "array",
-    |                     "failover", "roundrobin"
+    | Supported values: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
+    |                   "postmark", "resend", "log", "array",
+    |                   "failover", "roundrobin"
     |
     */
 
@@ -29,18 +29,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de los Mailers
+    | Mailers Configuration
     |--------------------------------------------------------------------------
     |
-    | Aquí se pueden configurar los distintos mailers que la aplicación usará.
-    | Laravel permite definir múltiples configuraciones para utilizar distintos
-    | métodos de envío según se requiera.
+    | Here you can configure the different mailers the application will use.
+    | Laravel allows defining multiple configurations to use different
+    | sending methods as needed.
     |
     */
 
     'mailers' => [
 
-        // Configuración para SMTP (protocolo estándar de correo)
+        // Configuration for SMTP (standard email protocol)
         'smtp' => [
             'transport' => 'smtp',
             'scheme' => env('MAIL_SCHEME'),
@@ -53,44 +53,44 @@ return [
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
-        // Configuración para Amazon SES
+        // Configuration for Amazon SES
         'ses' => [
             'transport' => 'ses',
         ],
 
-        // Configuración para Postmark
+        // Configuration for Postmark
         'postmark' => [
             'transport' => 'postmark',
-            // Opcionalmente se puede definir un stream de mensajes
+            // Optionally, a message stream can be defined
             // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
             // 'client' => [
             //     'timeout' => 5,
             // ],
         ],
 
-        // Configuración para Resend (servicio de reenvío de correos)
+        // Configuration for Resend (email forwarding service)
         'resend' => [
             'transport' => 'resend',
         ],
 
-        // Configuración para Sendmail (correo en servidores Unix)
+        // Configuration for Sendmail (email on Unix servers)
         'sendmail' => [
             'transport' => 'sendmail',
             'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
         ],
 
-        // Registro de correos en logs (para pruebas)
+        // Log emails (for testing purposes)
         'log' => [
             'transport' => 'log',
             'channel' => env('MAIL_LOG_CHANNEL'),
         ],
 
-        // Almacenar correos en un array (sin enviarlos)
+        // Store emails in an array (without sending them)
         'array' => [
             'transport' => 'array',
         ],
 
-        // Estrategia de failover: intenta SMTP, luego Log si falla
+        // Failover strategy: tries SMTP first, then Log if it fails
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
@@ -99,7 +99,7 @@ return [
             ],
         ],
 
-        // Estrategia de balanceo Round Robin (SES y Postmark)
+        // Round-robin load balancing strategy (SES and Postmark)
         'roundrobin' => [
             'transport' => 'roundrobin',
             'mailers' => [
@@ -112,12 +112,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Dirección Global "From"
+    | Global "From" Address
     |--------------------------------------------------------------------------
     |
-    | Se puede definir un remitente global para todos los correos enviados
-    | desde la aplicación. Aquí se especifica el nombre y dirección de correo
-    | que se usará como "De:" en los emails.
+    | A global sender can be defined for all emails sent from the application.
+    | Here, you specify the name and email address that will be used as "From:" in emails.
     |
     */
 

@@ -8,23 +8,23 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class AdminController
  *
- * Controlador responsable de manejar las acciones del administrador.
+ * Controller responsible for handling administrator actions.
  *
  * @package App\Http\Controllers
  */
 class AdminController extends Controller
 {
     /**
-     * Muestra la vista principal del panel de administración.
+     * Displays the main view of the administration panel.
      *
-     * Este método obtiene el usuario autenticado y lo pasa a la vista 
-     * de administración para su uso en la interfaz.
+     * This method retrieves the authenticated user and passes it to the 
+     * administration view for use in the interface.
      *
-     * @return \Illuminate\Contracts\View\View Vista de administración con los datos del usuario autenticado.
+     * @return \Illuminate\Contracts\View\View Administration view with authenticated user data.
      */
     public function index()
     {
-        $user = Auth::user(); // Obtener usuario autenticado
-        return view('admin.admi', compact('user')); // Cargar la vista admin.admi
+        $user = Auth::user(); // Retrieve authenticated user
+        return view('admin.admi', compact('user')); // Load the admin.admi view
     }
 }

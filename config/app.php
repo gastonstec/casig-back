@@ -1,20 +1,21 @@
 <?php
 
 /**
- * Archivo de configuración de la aplicación en Laravel.
+ * Laravel application configuration file.
  *
- * Este archivo gestiona los valores esenciales que determinan el comportamiento de la aplicación,
- * incluyendo su entorno, URL base, zona horaria, localización y claves de encriptación.
+ * This file manages the essential values that determine the application's behavior,
+ * including its environment, base URL, timezone, localization, and encryption keys.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Nombre de la Aplicación
+    | Application Name
     |--------------------------------------------------------------------------
     |
-    | Nombre de la aplicación que se mostrará en notificaciones y otros elementos de UI.
+    | The name of the application that will be displayed in notifications
+    | and other UI elements.
     |
     */
 
@@ -22,11 +23,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Entorno de la Aplicación
+    | Application Environment
     |--------------------------------------------------------------------------
     |
-    | Define el entorno en el que la aplicación se ejecuta. Se recomienda gestionarlo
-    | mediante el archivo ".env" para facilitar la configuración.
+    | Defines the environment in which the application runs. It is recommended
+    | to manage this through the ".env" file for easier configuration.
     |
     */
 
@@ -34,11 +35,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Modo de Depuración de la Aplicación
+    | Application Debug Mode
     |--------------------------------------------------------------------------
     |
-    | Si está habilitado, Laravel mostrará mensajes detallados de error. En producción,
-    | se recomienda deshabilitarlo para evitar exponer información sensible.
+    | If enabled, Laravel will display detailed error messages. In production,
+    | it is recommended to disable it to prevent exposing sensitive information.
     |
     */
 
@@ -46,10 +47,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | URL de la Aplicación
+    | Application URL
     |--------------------------------------------------------------------------
     |
-    | Define la URL base de la aplicación, utilizada en comandos de Artisan y generación de enlaces.
+    | Defines the base URL of the application, used in Artisan commands and link generation.
     |
     */
 
@@ -57,11 +58,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Zona Horaria de la Aplicación
+    | Application Timezone
     |--------------------------------------------------------------------------
     |
-    | Determina la zona horaria utilizada en toda la aplicación. Se recomienda establecerla
-    | acorde a la región donde opera la mayoría de los usuarios.
+    | Determines the timezone used throughout the application. It is recommended
+    | to set it according to the region where most users operate.
     |
     */
 
@@ -69,10 +70,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de Localización
+    | Localization Configuration
     |--------------------------------------------------------------------------
     |
-    | Define el idioma por defecto de la aplicación y su idioma de respaldo.
+    | Defines the default language of the application and its fallback language.
     |
     */
 
@@ -82,11 +83,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Clave de Encriptación
+    | Encryption Key
     |--------------------------------------------------------------------------
     |
-    | Esta clave es utilizada por los servicios de encriptación de Laravel y debe ser una cadena
-    | aleatoria de 32 caracteres. Se recomienda gestionarla a través de variables de entorno.
+    | This key is used by Laravel's encryption services and must be a random
+    | 32-character string. It is recommended to manage it through environment variables.
     |
     */
 
@@ -101,11 +102,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Modo de Mantenimiento
+    | Maintenance Mode
     |--------------------------------------------------------------------------
     |
-    | Configura el modo de mantenimiento de la aplicación. Laravel permite controlarlo
-    | a través de diferentes drivers como "file" o "cache".
+    | Configures the application's maintenance mode. Laravel allows managing it
+    | through different drivers such as "file" or "cache".
     |
     */
 

@@ -7,54 +7,54 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * Clase UserFactory
+ * Class UserFactory
  *
- * Esta fábrica permite la creación de instancias ficticias del modelo `User`
- * para pruebas y seeding en la base de datos.
+ * This factory allows the creation of fake instances of the `User` model
+ * for testing and database seeding.
  *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
     /**
-     * Contraseña predeterminada utilizada en la fábrica.
+     * Default password used in the factory.
      *
-     * Se mantiene estática para evitar múltiples encriptaciones durante la generación
-     * de usuarios en las pruebas.
+     * It remains static to prevent multiple encryptions during user generation
+     * in tests.
      *
      * @var string|null
      */
     protected static ?string $password = null;
 
     /**
-     * Define el estado por defecto del modelo `User`.
+     * Defines the default state of the `User` model.
      *
-     * Se generan valores ficticios para los atributos, incluyendo:
-     * - Nombre aleatorio
-     * - Email único y seguro
-     * - Fecha de verificación de correo electrónico actual
-     * - Contraseña encriptada
-     * - Token de "remember me"
+     * Generates fake values for the attributes, including:
+     * - Random name
+     * - Unique and secure email
+     * - Current email verification timestamp
+     * - Encrypted password
+     * - "Remember me" token
      *
-     * @return array<string, mixed> Datos generados para un usuario.
+     * @return array<string, mixed> Generated user data.
      */
     public function definition(): array
     {
         return [
-            'name' => fake()->name(), // Genera un nombre aleatorio
-            'email' => fake()->unique()->safeEmail(), // Genera un correo único
-            'email_verified_at' => now(), // Marca el correo como verificado
-            'password' => static::$password ??= Hash::make('password'), // Contraseña encriptada
-            'remember_token' => Str::random(10), // Token aleatorio
+            'name' => fake()->name(), // Generates a random name
+            'email' => fake()->unique()->safeEmail(), // Generates a unique email
+            'email_verified_at' => now(), // Marks the email as verified
+            'password' => static::$password ??= Hash::make('password'), // Encrypted password
+            'remember_token' => Str::random(10), // Random token
         ];
     }
 
     /**
-     * Indica que el email del usuario no está verificado.
+     * Indicates that the user's email is not verified.
      *
-     * Esta función se usa en pruebas donde se requiere un usuario sin verificar.
+     * This function is used in tests where an unverified user is required.
      *
-     * @return static Devuelve una instancia del estado modificado.
+     * @return static Returns an instance with the modified state.
      */
     public function unverified(): static
     {

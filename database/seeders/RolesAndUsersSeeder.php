@@ -8,45 +8,54 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * Seeder `RolesAndUsersSeeder`
- * 
- * Se encarga de la creación de los roles y la asignación de estos a usuarios predefinidos en la base de datos.
+ * Seeder class for creating roles and assigning them to users.
  */
 class RolesAndUsersSeeder extends Seeder
 {
     /**
-     * Ejecuta el seeder.
-     * 
-     * Crea los roles `admin` y `employee` y asigna dichos roles a usuarios específicos.
+     * Runs the seeder.
+     *
+     * Creates roles and assigns them to specific users in the database.
      *
      * @return void
      */
     public function run(): void
     {
-        // ✅ Creación de roles si no existen
-        $adminRole = Role::firstOrCreate(['name' => 'admin']); // Rol de administrador
-        $employeeRole = Role::firstOrCreate(['name' => 'employee']); // Rol de empleado
+        // ✅ Create roles if they do not exist
+        $adminRole = Role::firstOrCreate(['name' => 'admin']); // Admin role
+        $employeeRole = Role::firstOrCreate(['name' => 'employee']); // Employee role
+        $dssRole = Role::firstOrCreate(['name' => 'dss']); // ✅ New DSS role
 
-        // ✅ Creación del usuario administrador si no existe
+        // ✅ Assign ADMIN role to vicohdz.fraga@gmail.com
         $adminUser = User::firstOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'vicohdz.fraga@gmail.com'],
             [
-                'name' => 'Admin User',
-                'password' => Hash::make('password'), // Se puede cambiar la contraseña por seguridad
+                'name' => 'Victor Hernandez',
+                'password' => Hash::make('password123'), // Change the password for security
             ]
         );
-        $adminUser->assignRole($adminRole); // ✅ Asignar rol de administrador
+        $adminUser->assignRole($adminRole);
 
-        // ✅ Creación del usuario empleado si no existe
+        // ✅ Assign EMPLOYEE role to pololohdz2000@gmail.com
         $employeeUser = User::firstOrCreate(
-            ['email' => 'employee@example.com'],
+            ['email' => 'pololohdz2000@gmail.com'],
             [
-                'name' => 'Employee User',
-                'password' => Hash::make('password'), // Se puede cambiar la contraseña
+                'name' => 'Polo Lopez',
+                'password' => Hash::make('password123'), // Change the password for security
             ]
         );
-        $employeeUser->assignRole($employeeRole); // ✅ Asignar rol de empleado
+        $employeeUser->assignRole($employeeRole);
 
-        echo "✅ Roles y usuarios creados correctamente.\n";
+        // ✅ Assign DSS role to victorhernandez.fraga@gmail.com
+        $dssUser = User::firstOrCreate(
+            ['email' => 'victorhernandez.fraga@gmail.com'],
+            [
+                'name' => 'Victor DSS',
+                'password' => Hash::make('password123'), // Change the password for security
+            ]
+        );
+        $dssUser->assignRole($dssRole); // ✅ Assign DSS role
+
+        echo "✅ Roles and users created successfully.\n";
     }
 }

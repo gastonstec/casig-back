@@ -1,60 +1,60 @@
 <?php
 
 /**
- * Configuración de autenticación de la aplicación en Laravel.
+ * Laravel application authentication configuration.
  *
- * Este archivo gestiona los controladores de autenticación y proveedores de usuarios,
- * permitiendo la configuración de diferentes estrategias de seguridad.
+ * This file manages authentication controllers and user providers,
+ * allowing the configuration of different security strategies.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración Predeterminada de Autenticación
+    | Default Authentication Configuration
     |--------------------------------------------------------------------------
     |
-    | Aquí se define el sistema de autenticación por defecto para la aplicación.
-    | Se pueden cambiar estos valores según los requisitos del proyecto.
+    | Here, the default authentication system for the application is defined.
+    | These values can be changed according to project requirements.
     |
     */
 
     'defaults' => [
-        'guard' => 'web', // Especifica el guard predeterminado (sesión para usuarios web)
-        'passwords' => 'users', // Especifica la configuración de restablecimiento de contraseñas
+        'guard' => 'web', // Specifies the default guard (session for web users)
+        'passwords' => 'users', // Specifies the password reset configuration
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de Guards de Autenticación
+    | Authentication Guards Configuration
     |--------------------------------------------------------------------------
     |
-    | Laravel permite múltiples "guards" de autenticación, que definen cómo se autentican
-    | los usuarios dentro de la aplicación (por sesión, token, etc.).
+    | Laravel allows multiple authentication "guards," which define how users
+    | authenticate within the application (via session, token, etc.).
     |
     */
 
     'guards' => [
         'web' => [
-            'driver' => 'session', // Utiliza sesiones para autenticar usuarios
-            'provider' => 'users', // Indica qué proveedor de usuarios se utilizará
+            'driver' => 'session', // Uses sessions to authenticate users
+            'provider' => 'users', // Indicates which user provider will be used
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de Proveedores de Usuarios
+    | User Providers Configuration
     |--------------------------------------------------------------------------
     |
-    | Los proveedores de usuarios definen cómo se recuperan los datos de los usuarios
-    | desde la base de datos o cualquier otro servicio externo.
+    | User providers define how user data is retrieved from the database
+    | or any external service.
     |
     */
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent', // Utiliza Eloquent para recuperar los usuarios
-            'model' => App\Models\User::class, // Define el modelo de usuario que se usará
+            'driver' => 'eloquent', // Uses Eloquent to retrieve users
+            'model' => App\Models\User::class, // Defines the user model to be used
         ],
     ],
 

@@ -6,22 +6,21 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\AsignacionController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\EndUserController;
+use App\Http\Controllers\DeviceAssignmentController; // ✅ Re-added DeviceAssignmentController
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Este archivo contiene todas las rutas de la aplicación.
-| Aquí se definen rutas de autenticación, vistas protegidas y rutas de API.
+| This file contains all the application routes.
+| Here, authentication routes, protected views, and API routes are defined.
 |
 */
 
 /**
- * Ruta principal - Página de bienvenida.
+ * Main Route - Welcome Page.
  *
  * @return \Illuminate\View\View
  */
@@ -31,12 +30,12 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Rutas de Autenticación con Google
+| Google Authentication Routes
 |--------------------------------------------------------------------------
 */
 
 /**
- * Redirige a la página de autenticación de Google.
+ * Redirects to Google's authentication page.
  *
  * @return \Symfony\Component\HttpFoundation\RedirectResponse
  */
@@ -45,43 +44,43 @@ Route::get('/auth/redirect/google', function () {
 });
 
 /**
- * Callback de autenticación con Google.
- * Obtiene la información del usuario y lo autentica en la aplicación.
+ * Google authentication callback.
+ * Retrieves user information and logs them into the application.
  *
  * @return \Illuminate\Http\RedirectResponse
  */
 Route::get('/auth/callback/google', function () {
     try {
-        // Obtiene el usuario desde Google
+        // Retrieves the user from Google
         $googleUser = Socialite::driver('google')->user();
 
-        // Busca o crea el usuario en la base de datos
+        // Finds or creates the user in the database
         $user = User::firstOrCreate(
             ['email' => $googleUser->getEmail()],
             [
                 'name' => $googleUser->getName(),
                 'google_id' => $googleUser->getId(),
-                'password' => bcrypt('default_password'), // No se usa, pero es obligatorio en la BD
+                'password' => bcrypt('default_password'), // Required but not used
             ]
         );
 
-        // Autentica al usuario
+        // Authenticates the user
         Auth::login($user);
         return redirect('/dashboard');
 
     } catch (\Exception $e) {
-        return redirect('/')->with('error', 'Error al autenticar con Google.');
+        return redirect('/')->with('error', 'Error authenticating with Google.');
     }
 });
 
 /*
 |--------------------------------------------------------------------------
-| Rutas Protegidas (Requieren Autenticación)
+| Protected Routes (Require Authentication)
 |--------------------------------------------------------------------------
 */
 
 /**
- * Ruta del Dashboard con control de roles.
+ * Dashboard Route with Role Control.
  *
  * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
  */
@@ -93,22 +92,22 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('admin.admi');
         } elseif ($user->hasRole('employee')) {
             return view('employee.dashboard', compact('user'));
-        } elseif ($user->hasRole('dss')) {
-            return view('dss.dss'); // ✅ Redirige a la vista DSS
+        } elseif ($user->hasRole('dss')) { // ✅ Ensures DSS redirection
+            return view('dss.dss');
         }
 
-        abort(403, 'Acceso denegado.');
+        abort(403, 'Access denied.');
     });
 });
 
 /*
 |--------------------------------------------------------------------------
-| Rutas para Administradores
+| Admin Routes
 |--------------------------------------------------------------------------
 */
 
 /**
- * Ruta para la vista de administrador.
+ * Route for the admin view.
  *
  * @return \Illuminate\View\View
  */
@@ -118,12 +117,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Rutas para Empleados
+| Employee Routes
 |--------------------------------------------------------------------------
 */
 
 /**
- * Ruta para la vista del empleado.
+ * Route for the employee view.
  *
  * @return \Illuminate\View\View
  */
@@ -133,29 +132,29 @@ Route::middleware(['auth', 'role:employee'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Rutas para DSS (Nuevo Rol)
+| DSS Routes (New Role)
 |--------------------------------------------------------------------------
 */
 
 /**
- * Ruta para la vista del usuario con rol DSS.
+ * Route for the DSS user view.
  *
  * @return \Illuminate\View\View
  */
 Route::middleware(['auth', 'role:dss'])->group(function () {
     Route::get('/dss', function () {
-        return view('dss.dss'); // ✅ Vista para DSS
+        return view('dss.dss'); // ✅ View for DSS
     })->name('dss.dashboard');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Ruta de Cierre de Sesión
+| Logout Route
 |--------------------------------------------------------------------------
 */
 
 /**
- * Cierra la sesión del usuario y lo redirige a la página de inicio.
+ * Logs the user out and redirects them to the homepage.
  *
  * @return \Illuminate\Http\RedirectResponse
  */
@@ -166,48 +165,48 @@ Route::get('/logout', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Rutas de API (Usuarios y Dispositivos)
+| API Routes (Users and Devices)
 |--------------------------------------------------------------------------
 */
 
 /**
- * Obtiene información de un usuario por ID.
+ * Retrieves user information by ID.
  *
  * @param int $id
  * @return \Illuminate\Http\JsonResponse
  */
-Route::get('/usuario/{id}', [AsignacionController::class, 'getUsuario']);
+Route::get('/usuario/{id}', [DeviceAssignmentController::class, 'getUsuario']); // ✅ Back to DeviceAssignmentController
 
 /**
- * Obtiene información de un dispositivo por ID.
+ * Retrieves device information by ID.
  *
  * @param int $id
  * @return \Illuminate\Http\JsonResponse
  */
-Route::get('/dispositivo/{id}', [AsignacionController::class, 'getDispositivo']);
+Route::get('/device/{id}', [DeviceAssignmentController::class, 'getDispositivo']);
 
 /*
 |--------------------------------------------------------------------------
-| Ruta para la Administración de Asignaciones
+| Assignment Management Route
 |--------------------------------------------------------------------------
 */
 
 /**
- * Muestra la vista de administración de asignaciones.
+ * Displays the assignment administration view.
  *
  * @return \Illuminate\View\View
  */
-Route::get('/admin', [AsignacionController::class, 'index'])->name('admin.admi');
+Route::get('/admin', [DeviceAssignmentController::class, 'index'])->name('admin.admi'); // ✅ Restored DeviceAssignmentController
 
 /*
 |--------------------------------------------------------------------------
-| Ruta para Obtener Información de Usuarios vía API
+| API Route to Retrieve User Information
 |--------------------------------------------------------------------------
 */
 
 /**
- * Devuelve información de un usuario en formato JSON.
+ * Returns user information in JSON format.
  *
  * @return \Illuminate\Http\JsonResponse
  */
-Route::get('/api/getUser', [UserController::class, 'getUserById']);
+Route::get('/api/getUser', [EndUserController::class, 'getUserById']);

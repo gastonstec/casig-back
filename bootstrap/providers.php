@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Archivo de configuración de proveedores de servicios en Laravel.
+ * Laravel service provider configuration file.
  *
- * Este archivo define los proveedores de servicios que se cargarán automáticamente
- * en la aplicación. Los proveedores de servicios son la forma en que Laravel
- * gestiona la inyección de dependencias y la configuración de paquetes externos.
+ * This file defines the service providers that will be automatically loaded
+ * in the application. Service providers are how Laravel manages 
+ * dependency injection and external package configuration.
  */
 
 return [
     /**
-     * Proveedor de servicios principal de la aplicación.
+     * Main application service provider.
      * 
-     * AppServiceProvider se encarga de registrar configuraciones esenciales
-     * y servicios utilizados en la aplicación.
+     * AppServiceProvider is responsible for registering essential configurations
+     * and services used in the application.
      */
     App\Providers\AppServiceProvider::class,
 ];

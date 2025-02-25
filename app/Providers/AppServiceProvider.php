@@ -7,18 +7,18 @@ use Illuminate\Support\ServiceProvider;
 /**
  * Class AppServiceProvider
  *
- * Proveedor de servicios de la aplicación. Aquí se pueden registrar y configurar
- * servicios globales para la aplicación.
+ * Application service provider. Here, global services for the application 
+ * can be registered and configured.
  *
  * @package App\Providers
  */
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Registrar servicios de la aplicación.
+     * Register application services.
      *
-     * Este método se usa para registrar cualquier servicio de la aplicación en
-     * el contenedor de dependencias de Laravel.
+     * This method is used to register any application service 
+     * in Laravel's dependency container.
      *
      * @return void
      */
@@ -28,10 +28,10 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Inicializar servicios de la aplicación.
+     * Initialize application services.
      *
-     * Este método se usa para configurar cualquier servicio después de que
-     * todos los proveedores de servicios hayan sido registrados.
+     * This method is used to configure any service after all 
+     * service providers have been registered.
      *
      * @return void
      */
