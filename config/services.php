@@ -1,24 +1,24 @@
 <?php
 
 /**
- * Configuración de servicios de terceros en Laravel.
+ * Configuration for third-party services in Laravel.
  *
- * Este archivo almacena las credenciales para servicios de terceros como Mailgun,
- * Postmark, AWS, Slack y otros. Permite centralizar la configuración de estas
- * integraciones para que los paquetes y la aplicación puedan acceder fácilmente
- * a ellas mediante variables de entorno.
+ * This file stores credentials for third-party services such as Mailgun,
+ * Postmark, AWS, Slack, and others. It centralizes the configuration of these
+ * integrations so that packages and the application can easily access them
+ * through environment variables.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Servicio de Postmark
+    | Postmark Service
     |--------------------------------------------------------------------------
     |
-    | Postmark es un servicio de envío de correos electrónicos transaccionales.
-    | Aquí se almacena el token de autenticación necesario para hacer uso
-    | de la API de Postmark.
+    | Postmark is a transactional email sending service.
+    | Here, the authentication token required to use the
+    | Postmark API is stored.
     |
     */
 
@@ -28,12 +28,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Servicio de Amazon SES
+    | Amazon SES Service
     |--------------------------------------------------------------------------
     |
-    | Amazon Simple Email Service (SES) permite enviar correos electrónicos
-    | a gran escala con alta fiabilidad. Se requiere la clave de acceso
-    | y la región en la que se encuentra configurado el servicio.
+    | Amazon Simple Email Service (SES) allows sending large-scale emails
+    | with high reliability. The access key and the configured
+    | service region are required.
     |
     */
 
@@ -45,11 +45,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Servicio Resend
+    | Resend Service
     |--------------------------------------------------------------------------
     |
-    | Resend es una alternativa para el envío de correos electrónicos.
-    | Aquí se almacena la clave API utilizada para autenticar las peticiones.
+    | Resend is an alternative for sending emails.
+    | Here, the API key used for authentication is stored.
     |
     */
 
@@ -59,12 +59,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Integración con Slack
+    | Slack Integration
     |--------------------------------------------------------------------------
     |
-    | Esta configuración permite enviar notificaciones a un canal de Slack
-    | utilizando un bot autenticado. Se requiere el token OAuth del bot
-    | y el nombre del canal predeterminado para recibir las notificaciones.
+    | This configuration allows sending notifications to a Slack channel
+    | using an authenticated bot. The bot's OAuth token
+    | and the default channel for notifications are required.
     |
     */
 
@@ -77,18 +77,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autenticación con Google
+    | Google Authentication
     |--------------------------------------------------------------------------
     |
-    | Configuración para el inicio de sesión con Google mediante OAuth.
-    | Se requieren el ID del cliente, la clave secreta y la URL de redirección.
+    | Configuration for Google login via OAuth.
+    | The client ID, secret key, and redirect URL are required.
     |
     */
 
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'), // ID del cliente de Google
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'), // Clave secreta del cliente
-        'redirect' => env('GOOGLE_REDIRECT_URI'), // URL de redirección tras autenticación
+        'client_id' => env('GOOGLE_CLIENT_ID'), // Google client ID
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'), // Client secret key
+        'redirect' => env('GOOGLE_REDIRECT_URI'), // Redirect URL after authentication
     ],
 
 ];

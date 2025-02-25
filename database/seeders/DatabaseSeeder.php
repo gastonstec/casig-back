@@ -9,55 +9,55 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * Clase `DatabaseSeeder`
+ * Class `DatabaseSeeder`
  * 
- * Seeder para la creación de roles, permisos y usuarios con asignación de roles.
+ * Seeder for creating roles, permissions, and assigning roles to users.
  */
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Ejecuta el seeder.
+     * Runs the seeder.
      * 
-     * Crea roles, permisos y asigna los roles a usuarios específicos en la base de datos.
+     * Creates roles, permissions, and assigns roles to specific users in the database.
      *
      * @return void
      */
     public function run(): void
     {
-        // ✅ Creación de roles si no existen
+        // ✅ Creating roles if they do not exist
         Role::firstOrCreate(['name' => 'admin']);
         Role::firstOrCreate(['name' => 'employee']);
-        Role::firstOrCreate(['name' => 'dss']); // ✅ Nuevo rol DSS
+        Role::firstOrCreate(['name' => 'dss']); // ✅ New DSS role
 
-        // ✅ Creación de permisos
-        Permission::firstOrCreate(['name' => 'crear cartas de asignacion']);
-        Permission::firstOrCreate(['name' => 'ver dispositivos asignados']);
+        // ✅ Creating permissions
+        Permission::firstOrCreate(['name' => 'crear cartas de asignacion']); // "Create assignment letters"
+        Permission::firstOrCreate(['name' => 'ver dispositivos asignados']); // "View assigned devices"
 
-        // ✅ Asignar el rol "admin" a un usuario específico
+        // ✅ Assign the "admin" role to a specific user
         $admin = User::where('email', 'vicohdz.fraga@gmail.com')->first();
         if ($admin) {
             $admin->assignRole('admin');
         }
 
-        // ✅ Asignar el rol "employee" a un usuario específico
+        // ✅ Assign the "employee" role to a specific user
         $employee = User::where('email', 'pololohdz2000@gmail.com')->first();
         if ($employee) {
             $employee->assignRole('employee');
         }
 
-        // ✅ Crear usuario con rol "dss" si no existe
+        // ✅ Create user with "dss" role if they do not exist
         $dssUser = User::firstOrCreate(
             ['email' => 'paosaenz201@gmail.com'],
             [
                 'name' => 'Paola',
-                'password' => Hash::make('password123'), // Se requiere en caso de autenticación estándar
+                'password' => Hash::make('password123'), // Required for standard authentication
             ]
         );
 
         if ($dssUser) {
-            $dssUser->assignRole('dss'); // ✅ Asignar rol DSS
+            $dssUser->assignRole('dss'); // ✅ Assign DSS role
         }
 
-        echo "✅ Roles y usuarios creados correctamente.\n";
+        echo "✅ Roles and users created successfully.\n";
     }
 }

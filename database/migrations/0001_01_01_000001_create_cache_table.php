@@ -5,40 +5,40 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Clase de migración para la creación de las tablas de caché en la base de datos.
+ * Migration class for creating cache tables in the database.
  */
 return new class extends Migration
 {
     /**
-     * Ejecuta la migración para crear las tablas `cache` y `cache_locks`.
+     * Runs the migration to create the `cache` and `cache_locks` tables.
      *
      * @return void
      */
     public function up(): void
     {
-        // Creación de la tabla 'cache' para almacenar datos en caché
+        // Creation of the 'cache' table to store cached data
         Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->primary(); // Clave única que identifica cada caché
-            $table->mediumText('value'); // Valor almacenado en la caché
-            $table->integer('expiration'); // Tiempo de expiración del caché en segundos
+            $table->string('key')->primary(); // Unique key identifying each cache entry
+            $table->mediumText('value'); // Stored cache value
+            $table->integer('expiration'); // Cache expiration time in seconds
         });
 
-        // Creación de la tabla 'cache_locks' para gestionar bloqueos de caché
+        // Creation of the 'cache_locks' table to manage cache locks
         Schema::create('cache_locks', function (Blueprint $table) {
-            $table->string('key')->primary(); // Clave única para identificar bloqueos
-            $table->string('owner'); // Identificador del propietario del bloqueo
-            $table->integer('expiration'); // Tiempo de expiración del bloqueo en segundos
+            $table->string('key')->primary(); // Unique key identifying locks
+            $table->string('owner'); // Identifier of the lock owner
+            $table->integer('expiration'); // Lock expiration time in seconds
         });
     }
 
     /**
-     * Revierte la migración eliminando las tablas creadas.
+     * Reverses the migration by deleting the created tables.
      *
      * @return void
      */
     public function down(): void
     {
-        Schema::dropIfExists('cache'); // Elimina la tabla de caché
-        Schema::dropIfExists('cache_locks'); // Elimina la tabla de bloqueos de caché
+        Schema::dropIfExists('cache'); // Deletes the cache table
+        Schema::dropIfExists('cache_locks'); // Deletes the cache locks table
     }
 };

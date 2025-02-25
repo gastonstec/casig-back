@@ -5,55 +5,55 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Clase de migración para la creación de tablas relacionadas con la autenticación de usuarios.
+ * Migration class for creating tables related to user authentication.
  */
 return new class extends Migration
 {
     /**
-     * Ejecuta la migración para crear las tablas `users`, `password_reset_tokens` y `sessions`.
+     * Runs the migration to create the `users`, `password_reset_tokens`, and `sessions` tables.
      *
      * @return void
      */
     public function up(): void
     {
-        // Creación de la tabla 'users'
+        // Creation of the 'users' table
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Clave primaria auto-incremental
-            $table->string('name'); // Nombre del usuario
-            $table->string('email')->unique(); // Correo electrónico único
-            $table->timestamp('email_verified_at')->nullable(); // Fecha de verificación del email
-            $table->string('password'); // Contraseña encriptada
-            $table->rememberToken(); // Token para la funcionalidad "recordarme"
-            $table->timestamps(); // Fechas de creación y actualización del usuario
+            $table->id(); // Auto-incrementing primary key
+            $table->string('name'); // User name
+            $table->string('email')->unique(); // Unique email address
+            $table->timestamp('email_verified_at')->nullable(); // Email verification timestamp
+            $table->string('password'); // Encrypted password
+            $table->rememberToken(); // Token for "remember me" functionality
+            $table->timestamps(); // Creation and update timestamps
         });
 
-        // Creación de la tabla 'password_reset_tokens' para gestionar restablecimientos de contraseña
+        // Creation of the 'password_reset_tokens' table to manage password resets
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary(); // Clave primaria basada en el correo electrónico
-            $table->string('token'); // Token de restablecimiento de contraseña
-            $table->timestamp('created_at')->nullable(); // Fecha de creación del token
+            $table->string('email')->primary(); // Primary key based on email
+            $table->string('token'); // Password reset token
+            $table->timestamp('created_at')->nullable(); // Token creation timestamp
         });
 
-        // Creación de la tabla 'sessions' para almacenar sesiones de usuarios
+        // Creation of the 'sessions' table to store user sessions
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary(); // Identificador único de sesión
-            $table->foreignId('user_id')->nullable()->index(); // Relación con la tabla `users`
-            $table->string('ip_address', 45)->nullable(); // Dirección IP del usuario
-            $table->text('user_agent')->nullable(); // Información del navegador/dispositivo
-            $table->longText('payload'); // Datos de la sesión serializados
-            $table->integer('last_activity')->index(); // Última actividad de la sesión
+            $table->string('id')->primary(); // Unique session identifier
+            $table->foreignId('user_id')->nullable()->index(); // Relationship with the `users` table
+            $table->string('ip_address', 45)->nullable(); // User's IP address
+            $table->text('user_agent')->nullable(); // Browser/device information
+            $table->longText('payload'); // Serialized session data
+            $table->integer('last_activity')->index(); // Last session activity
         });
     }
 
     /**
-     * Revierte la migración eliminando las tablas creadas.
+     * Reverses the migration by deleting the created tables.
      *
      * @return void
      */
     public function down(): void
     {
-        Schema::dropIfExists('users'); // Elimina la tabla de usuarios
-        Schema::dropIfExists('password_reset_tokens'); // Elimina la tabla de restablecimiento de contraseñas
-        Schema::dropIfExists('sessions'); // Elimina la tabla de sesiones
+        Schema::dropIfExists('users'); // Deletes the users table
+        Schema::dropIfExists('password_reset_tokens'); // Deletes the password reset tokens table
+        Schema::dropIfExists('sessions'); // Deletes the sessions table
     }
 };

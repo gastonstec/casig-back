@@ -7,28 +7,28 @@ use Illuminate\Http\Request;
 /**
  * Class UserController
  *
- * Controlador para la simulación de datos de usuario.
- * Proporciona información dummy que puede ser utilizada para pruebas,
- * emulando la futura integración con un sistema externo como ServiceNow.
+ * Controller for user data simulation.
+ * Provides dummy information that can be used for testing,
+ * emulating future integration with an external system like ServiceNow.
  *
  * @package App\Http\Controllers
  */
-class UserController extends Controller
+class EndUserController extends Controller
 {
     /**
-     * Obtiene información simulada de un usuario basado en los parámetros proporcionados en la consulta.
+     * Retrieves simulated user information based on the provided query parameters.
      *
-     * @param Request $request Objeto de solicitud HTTP que contiene los parámetros de consulta.
-     * @return \Illuminate\Http\JsonResponse Respuesta en formato JSON con datos ficticios del usuario.
+     * @param Request $request HTTP request object containing the query parameters.
+     * @return \Illuminate\Http\JsonResponse JSON response with dummy user data.
      */
     public function getUserById(Request $request)
     {
-        // Obtiene los valores de la URL, o deja valores predeterminados si no se proporcionan
+        // Retrieves URL values or defaults if not provided
         $userId = $request->query('UserId', 'Aquí va el UserId');
         $name = $request->query('Name', 'Aquí va el nombre');
         $email = $request->query('Email', 'Aquí va el email');
 
-        // Devuelve una respuesta JSON con información dummy del usuario
+        // Returns a JSON response with dummy user information
         return response()->json([
             "UserId" => $userId,
             "Name" => $name,

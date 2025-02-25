@@ -6,11 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 /**
  * Class User
  *
- * Representa a un usuario autenticado en el sistema.
+ * Represents an authenticated user in the system.
  *
  * @package App\Models
  */
@@ -19,21 +20,21 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     /**
-     * Campos que pueden ser asignados masivamente (Mass Assignment).
+     * Fields that can be mass assigned.
      *
      * @var array
      */
     protected $fillable = ['name', 'email', 'password', 'google_id'];
 
     /**
-     * Campos que deben permanecer ocultos en serializaciones JSON.
+     * Fields that should remain hidden in JSON serializations.
      *
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * Conversión de tipos de atributos.
+     * Attribute type casting.
      *
      * @var array
      */

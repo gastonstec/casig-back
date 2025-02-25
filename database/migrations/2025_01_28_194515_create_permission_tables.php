@@ -5,12 +5,12 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Clase de migración para la gestión de permisos y roles en la base de datos.
+ * Migration class for managing permissions and roles in the database.
  */
 return new class extends Migration
 {
     /**
-     * Ejecuta la migración para crear las tablas de permisos, roles y relaciones entre modelos.
+     * Runs the migration to create the permissions, roles, and model relationships tables.
      *
      * @return void
      */
@@ -23,31 +23,31 @@ return new class extends Migration
         $pivotPermission = $columnNames['permission_pivot_key'] ?? 'permission_id';
 
         if (empty($tableNames)) {
-            throw new \Exception('Error: config/permission.php not cargado. Ejecuta [php artisan config:clear] e inténtalo de nuevo.');
+            throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
         if ($teams && empty($columnNames['team_foreign_key'] ?? null)) {
-            throw new \Exception('Error: team_foreign_key en config/permission.php no encontrado. Ejecuta [php artisan config:clear] e inténtalo de nuevo.');
+            throw new \Exception('Error: team_foreign_key not found in config/permission.php. Run [php artisan config:clear] and try again.');
         }
 
-        // Creación de la tabla de permisos
+        // Creation of the permissions table
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
-            $table->bigIncrements('id'); // ID del permiso
-            $table->string('name'); // Nombre del permiso
-            $table->string('guard_name'); // Guard asociado
+            $table->bigIncrements('id'); // Permission ID
+            $table->string('name'); // Permission name
+            $table->string('guard_name'); // Associated guard
             $table->timestamps();
 
-            $table->unique(['name', 'guard_name']); // Garantiza que no haya nombres duplicados por guard
+            $table->unique(['name', 'guard_name']); // Ensures no duplicate names per guard
         });
 
-        // Creación de la tabla de roles
+        // Creation of the roles table
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
-            $table->bigIncrements('id'); // ID del rol
+            $table->bigIncrements('id'); // Role ID
             if ($teams || config('permission.testing')) {
                 $table->unsignedBigInteger($columnNames['team_foreign_key'])->nullable();
                 $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
             }
-            $table->string('name'); // Nombre del rol
-            $table->string('guard_name'); // Guard asociado
+            $table->string('name'); // Role name
+            $table->string('guard_name'); // Associated guard
             $table->timestamps();
 
             if ($teams || config('permission.testing')) {
@@ -57,7 +57,7 @@ return new class extends Migration
             }
         });
 
-        // Relación entre permisos y modelos
+        // Relationship between permissions and models
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotPermission, $teams) {
             $table->unsignedBigInteger($pivotPermission);
             $table->string('model_type');
@@ -81,7 +81,7 @@ return new class extends Migration
             }
         });
 
-        // Relación entre roles y modelos
+        // Relationship between roles and models
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotRole, $teams) {
             $table->unsignedBigInteger($pivotRole);
             $table->string('model_type');
@@ -105,7 +105,7 @@ return new class extends Migration
             }
         });
 
-        // Relación entre roles y permisos
+        // Relationship between roles and permissions
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames, $pivotRole, $pivotPermission) {
             $table->unsignedBigInteger($pivotPermission);
             $table->unsignedBigInteger($pivotRole);
@@ -123,14 +123,14 @@ return new class extends Migration
             $table->primary([$pivotPermission, $pivotRole], 'role_has_permissions_permission_id_role_id_primary');
         });
 
-        // Limpieza de caché de permisos para evitar errores
+        // Clears permission cache to avoid errors
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
             ->forget(config('permission.cache.key'));
     }
 
     /**
-     * Revierte la migración eliminando las tablas creadas.
+     * Reverses the migration by deleting the created tables.
      *
      * @return void
      */
@@ -139,7 +139,7 @@ return new class extends Migration
         $tableNames = config('permission.table_names');
 
         if (empty($tableNames)) {
-            throw new \Exception('Error: config/permission.php no encontrado. Por favor, publícalo antes de continuar o elimina las tablas manualmente.');
+            throw new \Exception('Error: config/permission.php not found. Please publish it before proceeding or manually delete the tables.');
         }
 
         Schema::dropIfExists($tableNames['role_has_permissions']);

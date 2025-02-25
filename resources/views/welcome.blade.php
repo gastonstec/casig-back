@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     
-    <!-- Carga de Bootstrap desde CDN -->
+    <!-- Load Bootstrap from CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        /* Estilos generales de la página */
+        /* General page styles */
         body {
             display: flex;
             flex-direction: column;
@@ -17,7 +17,7 @@
             background-color: #d6d6d6;
         }
 
-        /* Estilos del encabezado */
+        /* Header styles */
         .header {
             background-color: #f8f9fa;
             padding: 15px;
@@ -34,7 +34,7 @@
             height: 50px;
         }
 
-        /* Contenido principal centrado */
+        /* Centered main content */
         .content {
             flex: 1;
             display: flex;
@@ -44,7 +44,7 @@
             padding-bottom: 40px;
         }
 
-        /* Caja de inicio de sesión */
+        /* Login box container */
         .login-box {
             background: white;
             padding: 30px;
@@ -53,7 +53,7 @@
             text-align: center;
         }
 
-        /* Pie de página */
+        /* Footer styles */
         .footer {
             background-color: #343a40;
             color: white;
@@ -61,7 +61,7 @@
             padding: 15px;
         }
 
-        /* Botón de Google */
+        /* Google login button */
         .google-btn {
             background-color: #4285F4;
             color: white;
@@ -82,7 +82,7 @@
 </head>
 <body>
 
-    <!-- Encabezado de la página -->
+    <!-- Page header -->
     <header class="header">
         <img src="{{ asset('img/logo.jpg') }}" alt="Logo de la empresa">
         
@@ -93,25 +93,25 @@
         </nav>
     </header>
     
-    <!-- Contenido principal -->
+    <!-- Main content -->
     <main class="content">
         <div class="login-box">
             <h2>Bienvenido</h2>
             <p>Por favor, inicia sesión para continuar</p>
 
-            <!-- Botón para iniciar sesión con Google -->
+            <!-- Button to sign in with Google -->
             <a href="{{ url('/auth/redirect/google') }}" class="google-btn">
                 Iniciar sesión con Google
             </a>
         </div>
     </main>
     
-    <!-- Pie de página -->
+    <!-- Footer -->
     <footer class="footer">
         &copy; 2025 Mi Aplicación. Todos los derechos reservados.
     </footer>
     
-    <!-- Carga de Bootstrap JS desde CDN -->
+    <!-- Load Bootstrap JS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

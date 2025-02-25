@@ -5,33 +5,33 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Clase de migración para la tabla "usuarios".
+ * Migration class for the "usuarios" table.
  * 
- * Esta tabla almacena información de los usuarios, incluyendo su nombre, supervisor,
- * centro de trabajo, correo electrónico y ubicación.
+ * This table stores user information, including name, supervisor,
+ * workplace center, email, and location.
  */
 return new class extends Migration
 {
     /**
-     * Ejecuta la migración para crear la tabla "usuarios".
+     * Runs the migration to create the "usuarios" table.
      *
      * @return void
      */
     public function up(): void
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->id(); // Identificador único del usuario
-            $table->string('nombre'); // Nombre completo del usuario
-            $table->string('supervisor'); // Nombre del supervisor directo
-            $table->string('centro'); // Centro de trabajo al que pertenece
-            $table->string('correo')->unique(); // Correo electrónico (único por usuario)
-            $table->string('ubicacion'); // Ubicación física del usuario
-            $table->timestamps(); // Campos de timestamps (created_at y updated_at)
+            $table->id(); // Unique user identifier
+            $table->string('nombre'); // Full name of the user
+            $table->string('supervisor'); // Name of the direct supervisor
+            $table->string('centro'); // Workplace center to which the user belongs
+            $table->string('correo')->unique(); // Email address (unique per user)
+            $table->string('ubicacion'); // Physical location of the user
+            $table->timestamps(); // Timestamp fields (created_at and updated_at)
         });
     }
 
     /**
-     * Revierte la migración eliminando la tabla "usuarios".
+     * Reverses the migration by deleting the "usuarios" table.
      *
      * @return void
      */

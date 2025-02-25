@@ -3,25 +3,25 @@
 use Illuminate\Support\Str;
 
 /**
- * Configuración de sesiones en Laravel.
+ * Laravel session configuration.
  *
- * Este archivo permite definir la configuración de las sesiones dentro de la aplicación.
- * Laravel ofrece múltiples drivers de sesión como base de datos, archivos, cookies,
- * caché y más, permitiendo adaptar el almacenamiento de sesiones según las necesidades.
+ * This file defines the session configuration within the application.
+ * Laravel offers multiple session drivers such as database, files, cookies,
+ * cache, and more, allowing session storage to be adapted as needed.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Driver de sesión predeterminado
+    | Default Session Driver
     |--------------------------------------------------------------------------
     |
-    | Define el almacenamiento de sesión a utilizar en la aplicación.
-    | Laravel soporta varios tipos de almacenamiento de sesión:
-    | 
-    | Opciones disponibles: "file", "cookie", "database", "apc",
-    |                       "memcached", "redis", "dynamodb", "array"
+    | Defines the session storage method to be used in the application.
+    | Laravel supports multiple session storage types:
+    |
+    | Available options: "file", "cookie", "database", "apc",
+    |                    "memcached", "redis", "dynamodb", "array"
     |
     */
 
@@ -29,12 +29,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Duración de la sesión
+    | Session Lifetime
     |--------------------------------------------------------------------------
     |
-    | Número de minutos que una sesión puede permanecer activa antes de expirar.
-    | Si se desea que expire cuando el usuario cierre el navegador, se debe activar
-    | la opción `expire_on_close`.
+    | The number of minutes a session can remain active before expiring.
+    | If it should expire when the user closes the browser, the
+    | `expire_on_close` option should be enabled.
     |
     */
 
@@ -43,12 +43,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cifrado de la sesión
+    | Session Encryption
     |--------------------------------------------------------------------------
     |
-    | Determina si los datos de la sesión deben almacenarse encriptados antes de
-    | ser guardados en el almacenamiento seleccionado. Esto proporciona mayor
-    | seguridad para la información almacenada en sesiones.
+    | Determines whether session data should be encrypted before being stored
+    | in the selected storage method. This provides greater security for session data.
     |
     */
 
@@ -56,11 +55,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Ubicación de almacenamiento de archivos de sesión
+    | File-Based Session Storage Location
     |--------------------------------------------------------------------------
     |
-    | Solo aplicable cuando el `driver` de sesión es "file".
-    | Especifica el directorio donde se almacenarán los archivos de sesión.
+    | Only applicable when the session `driver` is "file".
+    | Specifies the directory where session files will be stored.
     |
     */
 
@@ -68,11 +67,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración para almacenamiento en base de datos
+    | Database Storage Configuration
     |--------------------------------------------------------------------------
     |
-    | Si se utiliza el `driver` "database" o "redis", se deben especificar la conexión
-    | y la tabla donde se guardarán las sesiones.
+    | If using the "database" or "redis" session `driver`, the connection
+    | and table where sessions will be stored must be specified.
     |
     */
 
@@ -81,11 +80,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Almacén de caché para sesiones
+    | Cache Store for Sessions
     |--------------------------------------------------------------------------
     |
-    | Si se usa un `driver` de caché como "apc", "memcached" o "redis", este
-    | parámetro define qué caché se debe utilizar para almacenar las sesiones.
+    | If using a cache-based `driver` such as "apc", "memcached", or "redis",
+    | this parameter defines which cache should be used for storing sessions.
     |
     */
 
@@ -93,12 +92,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Probabilidad de limpiar sesiones caducadas
+    | Probability of Cleaning Expired Sessions
     |--------------------------------------------------------------------------
     |
-    | Algunos almacenamientos de sesión requieren limpieza manual de datos caducados.
-    | Esta opción define la probabilidad de que la limpieza se ejecute en una solicitud.
-    | El valor [2, 100] significa que hay un 2% de probabilidad de que se ejecute.
+    | Some session storage methods require manual cleanup of expired data.
+    | This option defines the probability of cleanup running on a request.
+    | The value [2, 100] means there is a 2% chance of execution.
     |
     */
 
@@ -106,10 +105,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Nombre de la cookie de sesión
+    | Session Cookie Name
     |--------------------------------------------------------------------------
     |
-    | Define el nombre de la cookie de sesión que Laravel generará y enviará al cliente.
+    | Defines the name of the session cookie that Laravel will generate
+    | and send to the client.
     |
     */
 
@@ -120,11 +120,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de cookies
+    | Cookie Configuration
     |--------------------------------------------------------------------------
     |
-    | Define las reglas y restricciones para las cookies de sesión, incluyendo el
-    | dominio, la seguridad HTTPS y la política SameSite.
+    | Defines rules and restrictions for session cookies, including
+    | domain, HTTPS security, and the SameSite policy.
     |
     */
 
@@ -135,14 +135,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Política Same-Site de la cookie de sesión
+    | Same-Site Policy for Session Cookies
     |--------------------------------------------------------------------------
     |
-    | Controla cómo las cookies de sesión son manejadas en peticiones cruzadas
-    | entre sitios web. Se recomienda mantenerlo en "lax" para evitar problemas
-    | con autenticaciones y seguridad CSRF.
+    | Controls how session cookies are handled in cross-site requests.
+    | It is recommended to keep it as "lax" to avoid issues
+    | with authentication and CSRF security.
     |
-    | Opciones: "lax", "strict", "none", null
+    | Options: "lax", "strict", "none", null
     |
     */
 
@@ -150,12 +150,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cookies de sesión particionadas
+    | Partitioned Session Cookies
     |--------------------------------------------------------------------------
     |
-    | Si se activa esta opción, las cookies estarán restringidas al sitio principal
-    | en un contexto de múltiples sitios. Esto solo funciona si la cookie es
-    | "secure" y Same-Site está en "none".
+    | If enabled, cookies will be restricted to the main site
+    | in a multi-site context. This only works if the cookie is
+    | "secure" and Same-Site is set to "none."
     |
     */
 

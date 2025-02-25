@@ -5,29 +5,29 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Clase de migración para la tabla "dispositivos".
+ * Migration class for the "dispositivos" table.
  * 
- * Esta tabla almacena información sobre los dispositivos, incluyendo su número de serie y categoría.
+ * This table stores information about devices, including their serial number and category.
  */
 return new class extends Migration
 {
     /**
-     * Ejecuta la migración para crear la tabla "dispositivos".
+     * Runs the migration to create the "dispositivos" table.
      *
      * @return void
      */
     public function up(): void
     {
         Schema::create('dispositivos', function (Blueprint $table) {
-            $table->id(); // Identificador único del dispositivo (autoincremental)
-            $table->string('numero_serie')->unique(); // Número de serie único del dispositivo
-            $table->string('categoria'); // Categoría a la que pertenece el dispositivo
-            $table->timestamps(); // Campos de timestamps (created_at y updated_at)
+            $table->id(); // Unique device identifier (auto-increment)
+            $table->string('numero_serie')->unique(); // Unique serial number of the device
+            $table->string('categoria'); // Category to which the device belongs
+            $table->timestamps(); // Timestamp fields (created_at and updated_at)
         });
     }
 
     /**
-     * Revierte la migración eliminando la tabla "dispositivos".
+     * Reverses the migration by deleting the "dispositivos" table.
      *
      * @return void
      */

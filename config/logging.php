@@ -6,22 +6,22 @@ use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 /**
- * Configuración del sistema de logging en Laravel.
+ * Laravel logging system configuration.
  *
- * Este archivo define la configuración de logs para la aplicación, utilizando
- * la librería Monolog para manejar múltiples canales de logging y niveles de severidad.
+ * This file defines the log configuration for the application, using
+ * the Monolog library to handle multiple logging channels and severity levels.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Canal de Log Predeterminado
+    | Default Log Channel
     |--------------------------------------------------------------------------
     |
-    | Esta opción define el canal de log predeterminado que se utilizará
-    | para escribir los registros de la aplicación. El valor debe coincidir
-    | con uno de los canales configurados en la lista "channels" de abajo.
+    | This option defines the default log channel that will be used
+    | to write the application's logs. The value must match one of
+    | the configured channels in the "channels" list below.
     |
     */
 
@@ -29,12 +29,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Canal de Log para Deprecaciones
+    | Deprecation Log Channel
     |--------------------------------------------------------------------------
     |
-    | Esta opción controla el canal donde se registrarán advertencias
-    | relacionadas con características obsoletas de PHP y librerías.
-    | Esto ayuda a preparar la aplicación para futuras actualizaciones.
+    | This option controls the channel where warnings related to deprecated
+    | PHP and library features will be logged. This helps prepare the
+    | application for future updates.
     |
     */
 
@@ -45,28 +45,28 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de Canales de Log
+    | Logging Channel Configuration
     |--------------------------------------------------------------------------
     |
-    | Aquí puedes definir múltiples canales de logging para tu aplicación.
-    | Laravel utiliza Monolog, permitiendo configurar diferentes handlers
-    | y formatos de logs según las necesidades del sistema.
+    | Here, you can define multiple logging channels for your application.
+    | Laravel uses Monolog, allowing different handlers and log formats
+    | to be configured according to system requirements.
     |
-    | Drivers disponibles: "single", "daily", "slack", "syslog",
-    |                      "errorlog", "monolog", "custom", "stack"
+    | Available drivers: "single", "daily", "slack", "syslog",
+    |                     "errorlog", "monolog", "custom", "stack"
     |
     */
 
     'channels' => [
 
-        // Canal de log apilado que agrupa otros canales
+        // Stacked log channel that groups multiple channels
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', env('LOG_STACK', 'single')),
             'ignore_exceptions' => false,
         ],
 
-        // Canal que almacena logs en un solo archivo
+        // Channel that stores logs in a single file
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
@@ -74,7 +74,7 @@ return [
             'replace_placeholders' => true,
         ],
 
-        // Canal de logs diarios (genera un nuevo archivo por día)
+        // Daily log channel (generates a new file per day)
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
@@ -83,7 +83,7 @@ return [
             'replace_placeholders' => true,
         ],
 
-        // Canal para enviar logs a Slack a través de un Webhook
+        // Channel for sending logs to Slack via Webhook
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
@@ -93,7 +93,7 @@ return [
             'replace_placeholders' => true,
         ],
 
-        // Canal para enviar logs a Papertrail
+        // Channel for sending logs to Papertrail
         'papertrail' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
@@ -106,7 +106,7 @@ return [
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
-        // Canal que escribe logs en la salida de error estándar (stderr)
+        // Channel that writes logs to the standard error output (stderr)
         'stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
@@ -118,7 +118,7 @@ return [
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
-        // Canal que envía logs al sistema de logging de syslog
+        // Channel that sends logs to the syslog logging system
         'syslog' => [
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
@@ -126,20 +126,20 @@ return [
             'replace_placeholders' => true,
         ],
 
-        // Canal que utiliza el sistema de logs de error de PHP
+        // Channel that uses PHP's built-in error logging system
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
 
-        // Canal de log que descarta cualquier mensaje de log (silencia los logs)
+        // Log channel that discards any log messages (silences logs)
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,
         ],
 
-        // Canal de log de emergencia utilizado si ningún otro canal está disponible
+        // Emergency log channel used if no other channel is available
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],

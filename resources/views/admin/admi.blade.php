@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control de Asignación de Equipos</title>
 
-    <!-- Importación de Bootstrap desde archivos locales -->
+    <!-- Bootstrap import from local files -->
     <link href="{{ asset('bootstrap.min.css') }}" rel="stylesheet">
 
     <style>
-        /* Estilos generales de la página */
+        /* General page styles */
         body {
             display: flex;
             flex-direction: column;
@@ -17,7 +17,7 @@
             background-color: #d6d6d6;
         }
 
-        /* Encabezado con logo */
+        /* Header with logo */
         .header {
             background-color: #f8f9fa;
             padding: 10px;
@@ -36,7 +36,7 @@
             height: 40px;
         }
 
-        /* Contenido principal */
+        /* Main content */
         .content {
             flex: 1;
             display: flex;
@@ -46,7 +46,7 @@
             padding-bottom: 40px;
         }
 
-        /* Caja contenedora */
+        /* Container box */
         .container-box {
             background: white;
             padding: 20px;
@@ -56,7 +56,7 @@
             max-width: 1600px;
         }
 
-        /* Diseño de los formularios */
+        /* Form layout */
         .form-container {
             display: flex;
             flex-wrap: wrap;
@@ -74,7 +74,7 @@
             padding: 5px;
         }
 
-        /* Pie de página */
+        /* Footer */
         .footer {
             background-color: #343a40;
             color: white;
@@ -92,7 +92,7 @@
             font-size: 0.9rem;
         }
 
-        /* Mensaje de error */
+        /* Error message */
         #error-message {
             display: none;
             font-size: 0.9rem;
@@ -112,7 +112,7 @@
 </head>
 <body>
 
-    <!-- Encabezado con logo -->
+    <!-- Header with logo -->
     <header class="header">
         <img src="{{ asset('img/logo.jpg') }}" alt="Logo">
     </header>
@@ -121,12 +121,12 @@
         <div class="container-box">
             <h2 class="text-center">Control de Asignación de Equipos</h2>
 
-            <!-- Formulario de asignación -->
+            <!-- Assignment form -->
             <form>
                 <div class="form-container">
                     <div id="error-message">El ID ingresado no existe.</div>
 
-                    <!-- Datos del usuario -->
+                    <!-- User data -->
                     <div class="form-group">
                         <label class="form-label">User ID</label>
                         <input type="text" class="form-control" id="userId" placeholder="Ingrese el ID del usuario">
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <!-- Campos para técnicos y dispositivos (solo visual) -->
+                <!-- Technician and device fields (visual only) -->
                 <h4>Técnico</h4>
                 <div class="form-group">
                     <label class="form-label">Técnico que entregará</label>
@@ -175,7 +175,7 @@
                     </select>
                 </div>
 
-                <!-- Tabla de dispositivos asignados -->
+                <!-- Assigned devices table -->
                 <h4>Lista de Dispositivos Asignados</h4>
                 <table class="table table-bordered">
                     <thead>
@@ -186,11 +186,11 @@
                         </tr>
                     </thead>
                     <tbody id="tablaDispositivos">
-                        <!-- Se llenará dinámicamente -->
+                        <!-- Will be dynamically filled -->
                     </tbody>
                 </table>
 
-                <!-- Botón de asignación -->
+                <!-- Assignment button -->
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Asignar Dispositivos</button>
                 </div>
@@ -198,21 +198,21 @@
         </div>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Footer -->
     <footer class="footer">
         &copy; 2025 Mi Aplicación. Todos los derechos reservados.
     </footer>
 
     <script>
         /**
-         * Evento para detectar cuando el campo de User ID pierde el foco.
+         * Event to detect when the User ID field loses focus.
          */
         document.getElementById('userId').addEventListener('blur', function() {
             let userId = this.value.trim();
             let errorMessage = document.getElementById('error-message');
 
             if (userId === '') {
-                limpiarCampos();
+                clearFields();
                 return;
             }
 
@@ -237,14 +237,14 @@
                 .catch(() => {
                     errorMessage.style.display = 'block';
                     setTimeout(() => errorMessage.style.display = "none", 3000);
-                    limpiarCampos();
+                    clearFields();
                 });
         });
 
         /**
-         * Función para limpiar los campos del formulario.
+         * Function to clear form fields.
          */
-        function limpiarCampos() {
+        function clearFields() {
             document.getElementById('nombre').value = '';
             document.getElementById('correo').value = '';
             document.getElementById('ubicacion').value = '';

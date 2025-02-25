@@ -9,32 +9,32 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class RoleMiddleware
  *
- * Middleware para restringir el acceso a rutas según el rol del usuario autenticado.
+ * Middleware to restrict access to routes based on the authenticated user's role.
  *
  * @package App\Http\Middleware
  */
 class RoleMiddleware
 {
     /**
-     * Maneja la solicitud entrante y verifica si el usuario tiene el rol requerido.
+     * Handles the incoming request and checks if the user has the required role.
      *
-     * @param  \Illuminate\Http\Request  $request La solicitud HTTP.
-     * @param  \Closure  $next La siguiente acción en la cadena de middleware.
-     * @param  string  $role El rol requerido para acceder a la ruta.
+     * @param  \Illuminate\Http\Request  $request The HTTP request.
+     * @param  \Closure  $next The next action in the middleware chain.
+     * @param  string  $role The required role to access the route.
      * @return mixed
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        // Verifica si el usuario está autenticado
+        // Checks if the user is authenticated
         if (!Auth::check()) {
-            return redirect('/login'); // Redirige a la página de login si no está autenticado
+            return redirect('/login'); // Redirects to the login page if not authenticated
         }
 
-        // Verifica si el usuario tiene el rol requerido
+        // Checks if the user has the required role
         if (!Auth::user()->hasRole($role)) {
-            abort(403, 'No tienes permiso para acceder a esta página.'); // Retorna error 403 si no tiene el rol
+            abort(403, 'No tienes permiso para acceder a esta página.'); // Returns a 403 error if the role is not met
         }
 
-        return $next($request); // Continúa con la ejecución de la solicitud
+        return $next($request); // Proceeds with the request execution
     }
 }

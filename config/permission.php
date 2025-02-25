@@ -1,22 +1,21 @@
 <?php
 
 /**
- * Configuración del paquete Spatie Laravel Permission.
+ * Spatie Laravel Permission package configuration.
  *
- * Este archivo contiene las configuraciones principales para manejar roles
- * y permisos en la aplicación. Utiliza la biblioteca de Spatie para facilitar
- * la gestión de autorizaciones.
+ * This file contains the main settings for managing roles and permissions
+ * in the application. It uses the Spatie library to simplify authorization management.
  */
 
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Modelos de Permisos y Roles
+    | Permission and Role Models
     |--------------------------------------------------------------------------
     |
-    | Se definen los modelos que el paquete usará para manejar permisos y roles.
-    | Estos modelos deben implementar las interfaces adecuadas de Spatie.
+    | Defines the models that the package will use to manage permissions and roles.
+    | These models must implement the appropriate Spatie interfaces.
     |
     */
 
@@ -27,11 +26,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Nombres de Tablas
+    | Table Names
     |--------------------------------------------------------------------------
     |
-    | Se definen los nombres de las tablas utilizadas para almacenar roles,
-    | permisos y sus relaciones con los usuarios u otros modelos.
+    | Defines the names of the tables used to store roles, permissions,
+    | and their relationships with users or other models.
     |
     */
 
@@ -45,11 +44,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Nombres de Columnas
+    | Column Names
     |--------------------------------------------------------------------------
     |
-    | Configuración de los nombres de columnas utilizados en las tablas de
-    | relación. Se pueden personalizar según las necesidades del proyecto.
+    | Configuration of the column names used in relationship tables.
+    | These can be customized based on project requirements.
     |
     */
 
@@ -62,11 +61,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Registro del Método de Verificación de Permisos
+    | Permission Check Method Registration
     |--------------------------------------------------------------------------
     |
-    | Si se establece en `true`, se registrará un método en el Gate de Laravel
-    | para comprobar los permisos automáticamente.
+    | If set to `true`, a method will be registered in Laravel's Gate
+    | to automatically check permissions.
     |
     */
 
@@ -74,11 +73,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Escucha de Eventos en Laravel Octane
+    | Laravel Octane Event Listener
     |--------------------------------------------------------------------------
     |
-    | Si se activa, Laravel escuchará eventos de finalización en Octane
-    | para restablecer permisos en cada solicitud o tarea completada.
+    | If enabled, Laravel will listen for termination events in Octane
+    | to reset permissions on each request or completed task.
     |
     */
 
@@ -86,11 +85,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Implementación de Equipos
+    | Teams Implementation
     |--------------------------------------------------------------------------
     |
-    | Si se activa, se utilizará la clave foránea de `team_id` en las tablas
-    | de permisos y roles, permitiendo la segmentación por equipos.
+    | If enabled, the `team_id` foreign key will be used in permission
+    | and role tables, allowing segmentation by teams.
     |
     */
 
@@ -98,11 +97,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Integración con Passport
+    | Passport Integration
     |--------------------------------------------------------------------------
     |
-    | Si se habilita, los permisos se validarán utilizando las credenciales
-    | de cliente de Laravel Passport.
+    | If enabled, permissions will be validated using Laravel Passport
+    | client credentials.
     |
     */
 
@@ -110,11 +109,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de Mensajes en Excepciones
+    | Exception Message Configuration
     |--------------------------------------------------------------------------
     |
-    | Si se habilitan, los mensajes de excepciones incluirán el permiso o
-    | rol requerido, lo que puede ser un riesgo de seguridad en algunos casos.
+    | If enabled, exception messages will include the required permission
+    | or role, which may pose a security risk in some cases.
     |
     */
 
@@ -123,11 +122,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Permisos con Wildcards
+    | Wildcard Permissions
     |--------------------------------------------------------------------------
     |
-    | Si se activa, se permitirá el uso de comodines (`*`) en los permisos.
-    | Útil para definir permisos más flexibles.
+    | If enabled, wildcard (`*`) permissions will be allowed.
+    | Useful for defining more flexible permissions.
     |
     */
 
@@ -135,12 +134,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Configuración de Caché
+    | Cache Configuration
     |--------------------------------------------------------------------------
     |
-    | Para mejorar el rendimiento, los permisos y roles se almacenan en caché
-    | durante un período definido. Se puede especificar un driver de caché
-    | personalizado si es necesario.
+    | To improve performance, permissions and roles are cached
+    | for a defined period. A custom cache driver can be specified if needed.
     |
     */
 
