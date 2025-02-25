@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Laravel filesystem configuration.
+ *
+ * This file defines the file storage configuration, allowing work with local
+ * disks, FTP servers, cloud storage (S3), and more.
+ */
+
 return [
 
     /*
@@ -7,9 +14,8 @@ return [
     | Default Filesystem Disk
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default filesystem disk that should be used
-    | by the framework. The "local" disk, as well as a variety of cloud
-    | based disks are available to your application for file storage.
+    | This option defines the default storage disk for the application.
+    | It can be configured to use local or cloud storage as needed.
     |
     */
 
@@ -17,12 +23,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Filesystem Disks
+    | Storage Disks
     |--------------------------------------------------------------------------
     |
-    | Below you may configure as many filesystem disks as necessary, and you
-    | may even configure multiple disks for the same driver. Examples for
-    | most supported storage drivers are configured here for reference.
+    | Laravel allows configuring multiple storage "disks," which can use different
+    | drivers such as local, FTP, SFTP, or Amazon S3.
     |
     | Supported drivers: "local", "ftp", "sftp", "s3"
     |
@@ -30,6 +35,7 @@ return [
 
     'disks' => [
 
+        // Local disk storage within the "storage/app/private" directory
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
@@ -38,6 +44,7 @@ return [
             'report' => false,
         ],
 
+        // Public storage accessible from the web (storage/app/public)
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -47,6 +54,7 @@ return [
             'report' => false,
         ],
 
+        // Amazon S3 storage
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -67,9 +75,10 @@ return [
     | Symbolic Links
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
+    | Laravel allows creating symbolic links that point to storage directories
+    | so that files are publicly accessible using the command:
+    |
+    | php artisan storage:link
     |
     */
 

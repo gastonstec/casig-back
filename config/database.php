@@ -2,17 +2,24 @@
 
 use Illuminate\Support\Str;
 
+/**
+ * Laravel database connection configuration.
+ *
+ * This file defines the available connections in the application, allowing
+ * integration with different database systems such as MySQL, PostgreSQL,
+ * SQLite, and SQL Server.
+ */
+
 return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Database Connection Name
+    | Default Connection
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for database operations. This is
-    | the connection which will be utilized unless another connection
-    | is explicitly specified when you execute a query / statement.
+    | This option defines the default database connection that will be used
+    | in the application. It can be modified through the DB_CONNECTION
+    | environment variable.
     |
     */
 
@@ -23,14 +30,14 @@ return [
     | Database Connections
     |--------------------------------------------------------------------------
     |
-    | Below are all of the database connections defined for your application.
-    | An example configuration is provided for each database system which
-    | is supported by Laravel. You're free to add / remove connections.
+    | This section defines the connection configurations for each supported
+    | database system. You can add or remove connections as needed.
     |
     */
 
     'connections' => [
 
+        // SQLite connection (database file)
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
@@ -42,6 +49,7 @@ return [
             'synchronous' => null,
         ],
 
+        // MySQL connection
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
@@ -62,6 +70,7 @@ return [
             ]) : [],
         ],
 
+        // MariaDB connection (MySQL derivative)
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
@@ -82,6 +91,7 @@ return [
             ]) : [],
         ],
 
+        // PostgreSQL connection
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),
@@ -97,6 +107,7 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        // SQL Server connection
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),
@@ -116,12 +127,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Migration Repository Table
+    | Migrations Table
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the migrations that have already run for
-    | your application. Using this information, we can determine which of
-    | the migrations on disk haven't actually been run on the database.
+    | Laravel uses this table to keep track of all the migrations that have
+    | been executed in the database.
     |
     */
 
@@ -132,12 +142,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Redis Databases
+    | Redis Configuration
     |--------------------------------------------------------------------------
     |
-    | Redis is an open source, fast, and advanced key-value store that also
-    | provides a richer body of commands than a typical key-value system
-    | such as Memcached. You may define your connection settings here.
+    | Redis is a fast and flexible key-value store. This configuration allows
+    | establishing connections with Redis instances.
     |
     */
 

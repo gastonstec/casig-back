@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
+    
+    <!-- Load Bootstrap from CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
+        /* General page styles */
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             background-color: #d6d6d6;
         }
+
+        /* Header styles */
         .header {
             background-color: #f8f9fa;
             padding: 15px;
@@ -23,9 +29,12 @@
             align-items: center;
             justify-content: space-between;
         }
+
         .header img {
             height: 50px;
         }
+
+        /* Centered main content */
         .content {
             flex: 1;
             display: flex;
@@ -34,6 +43,8 @@
             padding-top: 80px;
             padding-bottom: 40px;
         }
+
+        /* Login box container */
         .login-box {
             background: white;
             padding: 30px;
@@ -41,12 +52,16 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+
+        /* Footer styles */
         .footer {
             background-color: #343a40;
             color: white;
             text-align: center;
             padding: 15px;
         }
+
+        /* Google login button */
         .google-btn {
             background-color: #4285F4;
             color: white;
@@ -59,15 +74,18 @@
             display: inline-block;
             margin-top: 10px;
         }
+
         .google-btn:hover {
             background-color: #357ae8;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-    <img src="{{ asset('img/logo.jpg') }}" alt="Logo">
 
+    <!-- Page header -->
+    <header class="header">
+        <img src="{{ asset('img/logo.jpg') }}" alt="Logo de la empresa">
+        
         <nav>
             <a href="#" class="mx-2 text-dark">Inicio</a>
             <a href="#" class="mx-2 text-dark">Servicios</a>
@@ -75,20 +93,26 @@
         </nav>
     </header>
     
+    <!-- Main content -->
     <main class="content">
         <div class="login-box">
             <h2>Bienvenido</h2>
             <p>Por favor, inicia sesión para continuar</p>
+
+            <!-- Button to sign in with Google -->
             <a href="{{ url('/auth/redirect/google') }}" class="google-btn">
                 Iniciar sesión con Google
             </a>
         </div>
     </main>
     
+    <!-- Footer -->
     <footer class="footer">
         &copy; 2025 Mi Aplicación. Todos los derechos reservados.
     </footer>
     
+    <!-- Load Bootstrap JS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -14,3 +14,5 @@
     </ul>
 </body>
 </html>
+
+<!-- ⚠️ This file is currently not in use. It may be activated in future versions if a more detailed admin panel is required. -->
