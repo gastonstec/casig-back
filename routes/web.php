@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SNController;
-use App\Http\Controllers\DeviceAssignmentController; // ✅ Re-added DeviceAssignmentController
+use Illuminate\Http\Request;
+use App\Http\Controllers\DeviceAssignmentController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -158,10 +159,15 @@ Route::middleware(['auth', 'role:dss'])->group(function () {
  *
  * @return \Illuminate\Http\RedirectResponse
  */
-Route::get('/logout', function () {
-    Auth::logout();
-    return redirect('/');
-});
+ 
+ Route::get('/logout', function (Request $request) {
+     Auth::logout(); // Cierra sesión en Laravel
+     session()->flush(); // Borra la sesión completamente
+ 
+     // Redirige al usuario a la pantalla de inicio (welcome.blade.php)
+     return redirect('/')->with('googleLogout', 'https://accounts.google.com/logout');
+ })->name('logout');
+ 
 
 /*
 |--------------------------------------------------------------------------

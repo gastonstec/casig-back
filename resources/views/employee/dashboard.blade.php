@@ -68,13 +68,16 @@
 </head>
 <body>
 
-<!-- Header with centered logo -->
+
+<!-- Header with logo and logout button -->
 <header class="header d-flex justify-content-between align-items-center px-4">
     <div class="logo-container">
         <img src="{{ asset('img/logo.jpg') }}" alt="Logo">
     </div>
-    <button type="button" class="btn btn-secondary">Cerrar sesión</button>
+    <!-- Logout button that triggers the session closure -->
+    <button type="button" class="btn btn-secondary" id="logoutButton">Cerrar sesión</button>
 </header>
+
 
 
 <!-- Main content -->
@@ -129,5 +132,30 @@
 
 <!-- Load Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    /**
+     * Event listener for the logout button.
+     * - Calls the Laravel logout route.
+     * - Opens Google's logout page in a new tab.
+     * - Redirects the user back to the welcome page.
+     */
+    document.getElementById("logoutButton").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Call the logout route in Laravel
+        fetch("{{ route('logout') }}")
+            .then(() => {
+                // Open the Google logout page in a new tab
+                window.open("https://accounts.google.com/logout", "_blank");
+
+                // Redirect the user to the welcome page after 1 second
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1000);
+            });
+    });
+</script>
+
+
 </body>
 </html>
