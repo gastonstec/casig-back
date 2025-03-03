@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\EndUserController;
+use App\Http\Controllers\SNController;
 use App\Http\Controllers\DeviceAssignmentController; // ✅ Re-added DeviceAssignmentController
 
 /*
@@ -209,4 +209,4 @@ Route::get('/admin', [DeviceAssignmentController::class, 'index'])->name('admin.
  *
  * @return \Illuminate\Http\JsonResponse
  */
-Route::get('/api/getUser', [EndUserController::class, 'getUserById']);
+Route::get('/api/getUser', [SNController::class, 'getUserById']);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /**
- * Class UserController
+ * Class SNController
  *
  * Controller for user data simulation.
  * Provides dummy information that can be used for testing,
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  *
  * @package App\Http\Controllers
  */
-class EndUserController extends Controller
+class SNController extends Controller
 {
     /**
      * Retrieves simulated user information based on the provided query parameters.
