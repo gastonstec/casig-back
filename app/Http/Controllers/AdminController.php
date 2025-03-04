@@ -4,27 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Technician;
+use App\Models\Device;
 
 /**
  * Class AdminController
  *
- * Controller responsible for handling administrator actions.
+ * Handles the admin panel and ensures required data is available.
  *
  * @package App\Http\Controllers
  */
 class AdminController extends Controller
 {
     /**
-     * Displays the main view of the administration panel.
+     * Displays the administration panel with all required data.
      *
-     * This method retrieves the authenticated user and passes it to the 
-     * administration view for use in the interface.
-     *
-     * @return \Illuminate\Contracts\View\View Administration view with authenticated user data.
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $user = Auth::user(); // Retrieve authenticated user
-        return view('admin.admi', compact('user')); // Load the admin.admi view
+        $user = Auth::user();
+    
+        if (!$user->hasRole('admin')) {
+            abort(403, 'No tienes permiso para acceder a esta página.');
+        }
+    
+        return view('admin.admi', compact('user'));
     }
 }

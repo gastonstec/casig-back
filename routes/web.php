@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SNController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\DeviceAssignmentController; 
+use App\Http\Controllers\DeviceAssignmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ use App\Http\Controllers\DeviceAssignmentController;
 |--------------------------------------------------------------------------
 |
 | This file contains all the application routes.
-| Here, authentication routes, protected views, and API routes are defined.
+| Authentication, protected views, and API routes are defined here.
 |
 */
 
@@ -108,11 +108,12 @@ Route::middleware(['auth'])->group(function () {
 */
 
 /**
- * Route for the admin view.
+ * Route for the admin panel.
+ * This version loads `AdminController@index` instead of `DeviceAssignmentController`.
  *
  * @return \Illuminate\View\View
  */
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', \Spatie\Permission\Middleware\RoleMiddleware::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.admi');
 });
 
@@ -127,7 +128,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
  *
  * @return \Illuminate\View\View
  */
-Route::middleware(['auth', 'role:employee'])->group(function () {
+Route::middleware(['auth', \Spatie\Permission\Middleware\RoleMiddleware::class])->group(function () {
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.dashboard');
 });
 
@@ -142,7 +143,7 @@ Route::middleware(['auth', 'role:employee'])->group(function () {
  *
  * @return \Illuminate\View\View
  */
-Route::middleware(['auth', 'role:dss'])->group(function () {
+Route::middleware(['auth', \Spatie\Permission\Middleware\RoleMiddleware::class])->group(function () {
     Route::get('/dss', function () {
         return view('dss.dss'); // ✅ View for DSS
     })->name('dss.dashboard');
@@ -159,15 +160,13 @@ Route::middleware(['auth', 'role:dss'])->group(function () {
  *
  * @return \Illuminate\Http\RedirectResponse
  */
- 
- Route::get('/logout', function (Request $request) {
-     Auth::logout(); // Cierra sesión en Laravel
-     session()->flush(); // Borra la sesión completamente
- 
-     // Redirige al usuario a la pantalla de inicio (welcome.blade.php)
-     return redirect('/')->with('googleLogout', 'https://accounts.google.com/logout');
- })->name('logout');
- 
+Route::get('/logout', function (Request $request) {
+    Auth::logout(); // Cierra sesión en Laravel
+    session()->flush(); // Borra la sesión completamente
+
+    // Redirige al usuario a la pantalla de inicio (welcome.blade.php)
+    return redirect('/')->with('googleLogout', 'https://accounts.google.com/logout');
+})->name('logout');
 
 /*
 |--------------------------------------------------------------------------
@@ -181,7 +180,7 @@ Route::middleware(['auth', 'role:dss'])->group(function () {
  * @param int $id
  * @return \Illuminate\Http\JsonResponse
  */
-Route::get('/usuario/{id}', [DeviceAssignmentController::class, 'getUsuario']); // ✅ Back to DeviceAssignmentController
+Route::get('/usuario/{id}', [DeviceAssignmentController::class, 'getUsuario']);
 
 /**
  * Retrieves device information by ID.
@@ -198,11 +197,14 @@ Route::get('/device/{id}', [DeviceAssignmentController::class, 'getDispositivo']
 */
 
 /**
- * Displays the assignment administration view.
+ * Displays the assignment administration view separately.
  *
  * @return \Illuminate\View\View
  */
-Route::get('/admin', [DeviceAssignmentController::class, 'index'])->name('admin.admi'); // ✅ Restored DeviceAssignmentController
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.admi');
+});
+
 
 /*
 |--------------------------------------------------------------------------

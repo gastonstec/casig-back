@@ -21,10 +21,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        /**
-         * Middleware for role management in the system.
-         * It verifies whether a user has a specific role before accessing certain routes.
-         */
-        'role' => \App\Http\Middleware\RoleMiddleware::class, 
+        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class, // ✅ Asegúrate de que esté
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
     ];
+    
 }
